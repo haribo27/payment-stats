@@ -27,28 +27,30 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  elasticsearch:
-    image: elasticsearch:7.17.25
+  payment-db:
+    image: postgres:16.1
+    container_name: postgres
     ports:
-      - "9200:9200"
+      - "5433:5432"
     environment:
-      - discovery.type=single-node
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=payment_stats
     volumes:
-      - esdata:/usr/share/elasticsearch/data
-  updater:
-    build: updater
-    image: payment-stats
-    container_name: payment-stats-updater
-    depends_on:
-      - kafka
-      - elasticsearch
+      - payment-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 5s
+      interval: 5s
+      retries: 10
   stats:
     build: stats
     image: payment-stats
     container_name: payment-stats-stats
     depends_on:
       - kafka
-      - elasticsearch
+      - payment-db
 
 volumes:
     esdata:
+    payment-volume:
