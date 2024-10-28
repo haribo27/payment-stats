@@ -23,7 +23,7 @@ public class KafkaMessagingService {
     @Transactional
     @KafkaListener(topics = topicPayments)
     public void createPayment(String json) throws JsonProcessingException {
-        log.info("Message consumed {}", json);
+        log.debug("Message consumed {}. Message transfer to Payment service", json);
         paymentService.savePayment(objectMapper.readValue(json, PaymentDto.class));
     }
 }

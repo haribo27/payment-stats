@@ -20,7 +20,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
@@ -44,9 +44,16 @@ services:
       interval: 5s
       retries: 10
   stats:
-    build: stats
+    build: updater
     image: payment-stats
-    container_name: payment-stats-stats
+    container_name: payment-stats
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://payment-db:5432/payment_stats
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     depends_on:
       - kafka
       - payment-db

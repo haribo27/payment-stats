@@ -15,9 +15,11 @@ public class PaymentDto {
     @JsonProperty("clientAccount")
     private String clientAccount;
     @JsonProperty("amount")
-    private long amount;
+    private double amount;
     @JsonProperty("okved")
     private String okved;
     @JsonProperty("receiveAccount")
     private String receiveAccount;
+    @JsonProperty("receiveClientBankBIK")
+    private String receiveClientBankBIK;
 }
