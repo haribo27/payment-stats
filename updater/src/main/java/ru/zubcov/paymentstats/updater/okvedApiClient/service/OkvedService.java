@@ -26,7 +26,7 @@ public class OkvedService {
         }
         JsonNode suggestionsNode = root.path("suggestions");
 
-        System.out.println(apiClient.getOkvedCategory(okved).getBody());
+        log.debug("Response body: {}", okved);
         return suggestionsNode.get(0).path("data").path("razdel").asText();
     }
 }
