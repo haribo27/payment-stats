@@ -27,21 +27,21 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public void savePayment(PaymentDto paymentDto) {
-        log.debug("Saving payment to database");
+        log.info("Saving payment to database");
         Payment payment = modelMapper.map(paymentDto, Payment.class);
         if (paymentDto.getOkved() == null || paymentDto.getOkved().isBlank()) {
-            log.debug("OKVED is blank or null, check is transfer is intra bank");
+            log.info("OKVED is blank or null, check is transfer is intra bank");
             if (isIntraBankTransfer(payment)) {
-                log.debug("Payment is intra bank transfer");
+                log.info("Payment is intra bank transfer");
                 payment.setIntraBankTransfer(true);
             }
         } else {
-            log.debug("Get okved category from API");
+            log.info("Get okved category from API");
             String okvedCategory = okvedService.getOkvedCategory(paymentDto.getOkved());
-            log.debug("Set category to payment");
+            log.info("Set category to payment");
             payment.setOkvedCategory(okvedCategory);
         }
-        log.debug("Save payment {}", payment);
+        log.info("Save payment {}", payment);
         paymentRepository.save(payment);
     }
 
