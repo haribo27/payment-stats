@@ -43,6 +43,19 @@ services:
       timeout: 5s
       interval: 5s
       retries: 10
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "--appendonly", "yes" ]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   stats:
     build: updater
     image: payment-stats
@@ -54,6 +67,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - kafka
       - payment-db
@@ -61,3 +76,4 @@ services:
 volumes:
     esdata:
     payment-volume:
+    redis-data:
