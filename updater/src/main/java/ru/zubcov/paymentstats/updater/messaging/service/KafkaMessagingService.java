@@ -15,13 +15,12 @@ import ru.zubcov.paymentstats.updater.service.PaymentService;
 @AllArgsConstructor
 public class KafkaMessagingService {
 
-    private static final String topicPayments = "${kafka-topic}";
     private final PaymentService paymentService;
     private final ObjectMapper objectMapper;
 
 
     @Transactional
-    @KafkaListener(topics = topicPayments)
+    @KafkaListener(topics = "${kafka-topic}")
     public void createPayment(String json) throws JsonProcessingException {
         log.info("Message consumed {}", json);
         paymentService.savePayment(objectMapper.readValue(json, PaymentDto.class));
