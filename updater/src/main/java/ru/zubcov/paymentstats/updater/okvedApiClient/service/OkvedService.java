@@ -31,7 +31,7 @@ public class OkvedService {
                 throw new UnexpectedApiResponseError("Some of response fields = null");
             }
         } else {
-            log.info("Request status: {}", response.getStatusCode());
+            log.warn("Request status: {}", response.getStatusCode());
             throw new UnexpectedApiResponseError("Response status:" + response.getStatusCode());
         }
         log.info("Razdel is got successfully");

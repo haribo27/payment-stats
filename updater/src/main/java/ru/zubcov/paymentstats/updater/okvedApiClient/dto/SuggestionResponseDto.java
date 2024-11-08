@@ -6,10 +6,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SuggestionResponseDto {
+public final class SuggestionResponseDto {
 
     @JsonProperty("suggestions")
-    private List<Suggestion> suggestions;
+    private final List<Suggestion> suggestions;
 
     @Data
     public static final class Suggestion {
