@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.PositiveOrZero;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -14,14 +15,14 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "client_id", nullable = false)
-    private long clientId;
+    private Long clientId;
     @Column(name = "client_account", length = 20, nullable = false)
     private String clientAccount;
     @Column(name = "amount", nullable = false)
     @PositiveOrZero
-    private double amount;
+    private BigDecimal amount;
     @Column(name = "okved_category ", length = 20)
     private String okvedCategory;
     @Column(name = "receive_account", length = 20, nullable = false)
