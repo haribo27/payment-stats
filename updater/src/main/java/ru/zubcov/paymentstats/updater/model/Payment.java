@@ -14,7 +14,7 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "client_id", nullable = false)
     private long clientId;
     @Column(name = "client_account", length = 20, nullable = false)
