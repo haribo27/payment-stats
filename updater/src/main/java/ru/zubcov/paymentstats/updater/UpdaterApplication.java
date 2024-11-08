@@ -8,9 +8,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class UpdaterApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(UpdaterApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(UpdaterApplication.class, args);
 
-	}
+    }
 
 }

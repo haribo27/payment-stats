@@ -2,7 +2,7 @@ package ru.zubcov.paymentstats.updater.messaging.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -12,18 +12,17 @@ import ru.zubcov.paymentstats.updater.service.PaymentService;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class KafkaMessagingService {
 
-    private static final String topicPayments = "${kafka-topic}";
     private final PaymentService paymentService;
     private final ObjectMapper objectMapper;
 
 
     @Transactional
-    @KafkaListener(topics = topicPayments)
+    @KafkaListener(topics = "${kafka-topic}")
     public void createPayment(String json) throws JsonProcessingException {
-        log.debug("Message consumed {}. Message transfer to Payment service", json);
+        log.info("Message consumed {}", json);
         paymentService.savePayment(objectMapper.readValue(json, PaymentDto.class));
     }
 }

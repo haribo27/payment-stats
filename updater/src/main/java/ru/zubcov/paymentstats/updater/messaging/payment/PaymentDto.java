@@ -3,23 +3,19 @@ package ru.zubcov.paymentstats.updater.messaging.payment;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class PaymentDto {
 
     @JsonProperty("clientId")
-    private long clientId;
+    private final long clientId;
     @JsonProperty("clientAccount")
-    private String clientAccount;
+    private final String clientAccount;
     @JsonProperty("amount")
-    private double amount;
+    private final long amount;
     @JsonProperty("okved")
-    private String okved;
+    private final String okved;
     @JsonProperty("receiveAccount")
-    private String receiveAccount;
-    @JsonProperty("receiveClientBankBIK")
-    private String receiveClientBankBIK;
+    private final String receiveAccount;
 }
