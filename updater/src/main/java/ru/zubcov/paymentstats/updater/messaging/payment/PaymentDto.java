@@ -18,4 +18,6 @@ public class PaymentDto {
     private final String okved;
     @JsonProperty("receiveAccount")
     private final String receiveAccount;
+    @JsonProperty("receiveClientBankBIK")
+    private String receiveClientBankBIK;
 }
