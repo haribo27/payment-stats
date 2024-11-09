@@ -1,12 +1,13 @@
 package ru.zubcov.paymentstats.updater.okvedApiClient.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ru.zubcov.paymentstats.updater.exception.UnexpectedApiResponseError;
 import ru.zubcov.paymentstats.updater.okvedApiClient.client.OkvedApiClient;
+import ru.zubcov.paymentstats.updater.okvedApiClient.dto.SuggestionResponseDto;
 
 @Service
 @RequiredArgsConstructor
@@ -15,8 +16,9 @@ public class OkvedService {
 
     private final OkvedApiClient apiClient;
 
+    @Cacheable(value = "okvedCategoryCache", key = "#okvedId")
     public String getOkvedCategory(String okvedId) {
-        String razdel = null;
+        String razdel;
         log.debug("Get category from API response");
         String query = "{\"query\": \"" + okvedId + "\"}";
         ResponseEntity<SuggestionResponseDto> response = apiClient.getOkvedCategory(query);
@@ -36,9 +38,5 @@ public class OkvedService {
         }
         log.info("Razdel is got successfully");
         return razdel;
-    }
-
-        log.debug("Response body: {}", okved);
-        return suggestionsNode.get(0).path("data").path("razdel").asText();
     }
 }
