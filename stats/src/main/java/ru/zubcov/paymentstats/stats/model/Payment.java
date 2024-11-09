@@ -1,10 +1,9 @@
-package ru.zubcov.paymentstats.updater.model;
+package ru.zubcov.paymentstats.stats.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -22,7 +21,6 @@ public class Payment {
     @Column(name = "client_account", length = 20, nullable = false)
     private String clientAccount;
     @Column(name = "amount", nullable = false)
-    @PositiveOrZero
     private BigDecimal amount;
     @Column(name = "okved_category ", length = 20)
     private String okvedCategory;

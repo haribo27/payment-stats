@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PaymentDto {
+public final class PaymentDto {
 
     @JsonProperty("clientId")
     private final long clientId;

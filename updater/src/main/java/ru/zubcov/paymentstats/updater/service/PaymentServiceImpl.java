@@ -11,6 +11,7 @@ import ru.zubcov.paymentstats.updater.model.Payment;
 import ru.zubcov.paymentstats.updater.okvedApiClient.service.OkvedService;
 import ru.zubcov.paymentstats.updater.repository.PaymentRepository;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Service
@@ -41,6 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
             log.info("Set category to payment");
             payment.setOkvedCategory(okvedCategory);
         }
+        payment.setTimestamp(LocalDateTime.now());
         log.info("Save payment {}", payment);
         paymentRepository.save(payment);
     }

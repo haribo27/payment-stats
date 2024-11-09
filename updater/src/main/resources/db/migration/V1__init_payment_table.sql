@@ -7,5 +7,7 @@ CREATE TABLE payments (
     amount DOUBLE PRECISION NOT NULL ,
     okved_category VARCHAR(20),
     intra_bank_transfer BOOLEAN,
-    receive_client_bank_bik VARCHAR(20) NOT NULL
+    receive_client_bank_bik VARCHAR(20) NOT NULL,
+    timestamp TIMESTAMP NOT NULL ,
+    PRIMARY KEY (id)
 );

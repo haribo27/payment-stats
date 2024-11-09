@@ -56,19 +56,34 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-  stats:
+  updater:
     build: updater
-    image: payment-stats
-    container_name: payment-stats
+    image: payment-stats-updater
+    container_name: payment-stats-updater
     ports:
       - "8080:8080"
     environment:
+      - SERVER_PORT-8080
       - SPRING_DATASOURCE_URL=jdbc:postgresql://payment-db:5432/payment_stats
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
+    depends_on:
+      - kafka
+      - payment-db
+  stats:
+    build: stats
+    image: payment-stats-stats
+    container_name: payment-stats
+    ports:
+      - "6060:6060"
+    environment:
+      - SERVER_PORT-6060
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://payment-db:5432/payment_stats
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
     depends_on:
       - kafka
       - payment-db
