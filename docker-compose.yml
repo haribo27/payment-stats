@@ -99,20 +99,6 @@ services:
       - updater
       - kafka
       - payment-db
-  stats:
-    build: stats
-    image: payment-stats-stats
-    container_name: payment-stats
-    ports:
-      - "6060:6060"
-    environment:
-      - SERVER_PORT-6060
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://payment-db:5432/payment_stats
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-    depends_on:
-      - kafka
-      - payment-db
 
 volumes:
     esdata:
