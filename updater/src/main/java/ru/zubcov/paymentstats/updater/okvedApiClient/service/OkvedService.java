@@ -18,7 +18,7 @@ public class OkvedService {
 
     @Cacheable(value = "okvedCategoryCache", key = "#okvedId")
     public String getOkvedCategory(String okvedId) {
-        String razdel = null;
+        String razdel;
         log.debug("Get category from API response");
         String query = "{\"query\": \"" + okvedId + "\"}";
         ResponseEntity<SuggestionResponseDto> response = apiClient.getOkvedCategory(query);
@@ -39,5 +39,4 @@ public class OkvedService {
         log.info("Razdel is got successfully");
         return razdel;
     }
-
 }
