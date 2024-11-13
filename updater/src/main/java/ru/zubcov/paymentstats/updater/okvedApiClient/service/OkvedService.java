@@ -16,7 +16,7 @@ public class OkvedService {
 
     private final OkvedApiClient apiClient;
 
-    @Cacheable(value = "okvedCategoryCache", key = "#okvedId")
+    @Cacheable(value = "okved", key = "#okvedId")
     public String getOkvedCategory(String okvedId) {
         String razdel;
         log.debug("Get category from API response");
