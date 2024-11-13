@@ -4,10 +4,9 @@ CREATE TABLE payments (
     client_id BIGINT NOT NULL ,
     client_account VARCHAR(20) NOT NULL ,
     receive_account VARCHAR(20) NOT NULL ,
-    amount DOUBLE PRECISION NOT NULL ,
+    amount DECIMAL NOT NULL ,
     okved_category VARCHAR(20),
     intra_bank_transfer BOOLEAN,
     receive_client_bank_bik VARCHAR(20) NOT NULL,
-    timestamp TIMESTAMP NOT NULL ,
     PRIMARY KEY (id)
 );

@@ -1,42 +1,42 @@
 package ru.zubcov.paymentstats.updater.okvedApiClient.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Value;
 
 import java.util.List;
 
-@Data
-public final class SuggestionResponseDto {
+@Value
+public class SuggestionResponseDto {
 
     @JsonProperty("suggestions")
-    private final List<Suggestion> suggestions;
+    List<Suggestion> suggestions;
 
-    @Data
-    public static final class Suggestion {
+    @Value
+    public static class Suggestion {
 
         @JsonProperty("value")
-        private final String value;
+        String value;
 
         @JsonProperty("unrestricted_value")
-        private final String unrestrictedValue;
+        String unrestrictedValue;
 
         @JsonProperty("data")
-        private final OkvedData data;
+        OkvedData data;
     }
 
-    @Data
-    public static final class OkvedData {
+    @Value
+    public static class OkvedData {
 
         @JsonProperty("idx")
-        private final String idx;
+        String idx;
 
         @JsonProperty("razdel")
-        private final String razdel;
+        String razdel;
 
         @JsonProperty("kod")
-        private final String kod;
+        String kod;
 
         @JsonProperty("name")
-        private final String name;
+        String name;
     }
 }

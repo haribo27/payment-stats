@@ -1,10 +1,12 @@
 package ru.zubcov.paymentstats.stats.exception;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.time.Instant;
 
-@Data
+@Getter
+@EqualsAndHashCode
 public final class ErrorResponse {
 
     private final String status;

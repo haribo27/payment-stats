@@ -29,7 +29,7 @@ public class Payment {
     @Column(name = "receive_client_bank_bik", nullable = false, length = 20)
     private String receiveClientBankBIK;
     @Column(name = "intra_bank_transfer", nullable = false)
-    private boolean intraBankTransfer;
+    private Boolean intraBankTransfer;
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 }

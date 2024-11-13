@@ -4,12 +4,16 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.zubcov.paymentstats.stats.dto.ClientRequestStatsDto;
 import ru.zubcov.paymentstats.stats.service.PaymentStatsService;
 import ru.zubcov.paymentstats.stats.util.PaymentStatsBy;
 
-@RestController
+@Controller
 @RequestMapping("/payment/stats")
 @RequiredArgsConstructor
 public class PaymentStatsController {

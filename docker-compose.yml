@@ -10,6 +10,11 @@ services:
       ZOO_MY_ID: 1
       ZOO_SERVERS: "server.1=zookeeper:2888:3888"
       ZOO_PORT: 2181
+    healthcheck:
+      test: ["CMD", "echo", "ruok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   kafka:
     image: wurstmeister/kafka:latest
@@ -27,6 +32,8 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
   payment-db:
     image: postgres:16.1
     container_name: postgres
@@ -71,8 +78,12 @@ services:
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
     depends_on:
-      - kafka
-      - payment-db
+      zookeeper:
+        condition: service_healthy
+      payment-db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
   stats:
     build: stats
     image: payment-stats-stats
@@ -85,8 +96,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
     depends_on:
-      - kafka
-      - payment-db
+      - updater
 
 volumes:
     esdata:

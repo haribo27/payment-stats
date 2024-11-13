@@ -1,4 +1,4 @@
-package ru.zubcov.paymentstats.stats.dto;
+package ru.zubcov.paymentstats.stats.model;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
