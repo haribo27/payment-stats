@@ -2,6 +2,7 @@ package ru.zubcov.paymentstats.updater.okvedApiClient.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.zubcov.paymentstats.updater.exception.UnexpectedApiResponseError;
@@ -15,6 +16,7 @@ public class OkvedService {
 
     private final OkvedApiClient apiClient;
 
+    @Cacheable(value = "okvedCategoryCache", key = "#okvedId")
     public String getOkvedCategory(String okvedId) {
         String razdel = null;
         log.debug("Get category from API response");
