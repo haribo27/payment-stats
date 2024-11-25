@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import ru.zubcov.paymentstats.updater.okvedApiClient.config.FeignConfig;
 import ru.zubcov.paymentstats.updater.okvedApiClient.dto.SuggestionResponseDto;
 
-@FeignClient(name = "okvedApiClient", url = "${okved.api-url}", configuration = FeignConfig.class)
+@FeignClient(name = "okvedApiClient", url = "${okved.api-url}",
+        configuration = FeignConfig.class)
 public interface OkvedApiClient {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

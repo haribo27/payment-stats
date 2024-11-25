@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 public final class PaymentDto {
@@ -13,7 +15,7 @@ public final class PaymentDto {
     @JsonProperty("clientAccount")
     private final String clientAccount;
     @JsonProperty("amount")
-    private final long amount;
+    private final BigDecimal amount;
     @JsonProperty("okved")
     private final String okved;
     @JsonProperty("receiveAccount")
